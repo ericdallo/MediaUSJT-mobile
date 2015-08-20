@@ -1,4 +1,4 @@
-package mediausjt.com.br.mediausjt;
+package com.mediausjt;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

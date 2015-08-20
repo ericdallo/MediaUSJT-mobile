@@ -1,9 +1,8 @@
-package mediausjt.com.br.mediausjt;
+package com.mediausjt;
 
 /**
  * Created by eric on 08/03/15.
  */
-import java.util.List;
 
 import android.app.Activity;
 import android.content.Context;
@@ -15,13 +14,17 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.util.List;
+
+
+
 
 public class CustomDrawerAdapter extends ArrayAdapter<DrawerItem> {
 
     private Context context;
     private List<DrawerItem> drawerItens;
     private int layoutResID;
-    private Main main;
+    private MainActivity mainActivity;
 
     public CustomDrawerAdapter(Context context, int layoutResourceID,List<DrawerItem> listItems) {
         super(context, layoutResourceID, listItems);
@@ -30,11 +33,11 @@ public class CustomDrawerAdapter extends ArrayAdapter<DrawerItem> {
         this.layoutResID = layoutResourceID;
     }
 
-    public void setMain(Main main){ // TODO Trocar pra fazer o casting do context pro main
-        this.main = main;
+    public void setMainActivity(MainActivity mainActivity){ // TODO Trocar pra fazer o casting do context pro mainActivity
+        this.mainActivity = mainActivity;
     }
-    public Main getMain(){
-        return this.main;
+    public MainActivity getMainActivity(){
+        return this.mainActivity;
     }
 
     @Override
@@ -77,9 +80,9 @@ public class CustomDrawerAdapter extends ArrayAdapter<DrawerItem> {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                     if(isChecked) //clicou e ficou true
-                        getMain().setAmi(true);
+                        getMainActivity().setAmi(true);
                     else
-                        getMain().setAmi(true);
+                        getMainActivity().setAmi(true);
 
                 }
             });

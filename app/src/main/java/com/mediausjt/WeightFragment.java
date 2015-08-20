@@ -14,10 +14,10 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 
 
-public class Frag3 extends Fragment implements SeekBar.OnSeekBarChangeListener{
+public class WeightFragment extends Fragment implements SeekBar.OnSeekBarChangeListener{
 
     public static final String NOME_ITEM = "Peso";
-    private final Main main;
+    private final MainActivity mainActivity;
     private SeekBar seek1,seek2,seek3;
     private TextView tvseek1,tvseek2,tvseek3;
     private double peso1,peso2;
@@ -27,19 +27,19 @@ public class Frag3 extends Fragment implements SeekBar.OnSeekBarChangeListener{
     private Typeface font,font2;
 
 
-    public Frag3(){
-        this.main = null;
+    public WeightFragment(){
+        this.mainActivity = null;
     }
 
     @SuppressLint("ValidFragment")
-    public Frag3(Main main) {
-        this.main = main;
+    public WeightFragment(MainActivity mainActivity) {
+        this.mainActivity = mainActivity;
     }
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.frag3, container, false);
 
-        prefs = getMain().getPrefs();
+        prefs = getMainActivity().getPrefs();
 
         font = Typeface.createFromAsset(getActivity().getAssets(), "fonts/aller.ttf");
         font2 = Typeface.createFromAsset(getActivity().getAssets(), "fonts/aller.ttf");
@@ -103,7 +103,7 @@ public class Frag3 extends Fragment implements SeekBar.OnSeekBarChangeListener{
             if(Double.parseDouble(speso) >= 0.1){
                 peso1 = Double.parseDouble(speso);
                 tvseek1.setText("1º Semestre: " + peso1);
-                main.setPeso1Setado("" + peso1);
+                mainActivity.setPeso1Setado("" + peso1);
 
                 String speso2 = "0."+((100-seek1.getProgress())/10);
                 peso2 = Double.parseDouble(speso2);
@@ -120,7 +120,7 @@ public class Frag3 extends Fragment implements SeekBar.OnSeekBarChangeListener{
             if(Double.parseDouble(speso2) >= 0.1){
                 peso2 = Double.parseDouble(speso2);
                 tvseek2.setText("2º Semestre: " + peso2);
-                main.setPeso2Setado("" + peso2);
+                mainActivity.setPeso2Setado("" + peso2);
 
                 String speso = "0."+((100-seek2.getProgress())/10);
                 peso1 = Double.parseDouble(speso);
@@ -163,7 +163,7 @@ public class Frag3 extends Fragment implements SeekBar.OnSeekBarChangeListener{
             salvaPeso();
     }
 
-    public Main getMain() {
-        return main;
+    public MainActivity getMainActivity() {
+        return mainActivity;
     }
 }

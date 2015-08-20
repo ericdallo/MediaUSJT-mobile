@@ -1,4 +1,4 @@
-package mediausjt.com.br.mediausjt;
+package com.mediausjt;
 
 import java.util.ArrayList;
 import java.util.HashMap;

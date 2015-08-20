@@ -5,7 +5,7 @@ android {
     buildToolsVersion "23.0.0"
 
     defaultConfig {
-        applicationId "mediausjt.com.br.mediausjt"
+        applicationId "com.mediausjt"
         minSdkVersion 11
         targetSdkVersion 23
         versionCode 14

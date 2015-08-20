@@ -1,5 +1,4 @@
-package mediausjt.com.br.mediausjt;
-
+package com.mediausjt;
 /**
  * Created by eric on 09/03/15.
  */

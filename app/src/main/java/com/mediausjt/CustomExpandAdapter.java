@@ -1,4 +1,4 @@
-package mediausjt.com.br.mediausjt;
+package com.mediausjt;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -30,14 +30,14 @@ public class CustomExpandAdapter extends BaseExpandableListAdapter implements Vi
     public Activity activity;
     TextView tvNota,tvMateria;
     private int grupoAtual;
-    private Main main;
+    private MainActivity mainActivity;
 
 
-    public CustomExpandAdapter(Activity act, SparseArray<Nota> notas,Main main) {
+    public CustomExpandAdapter(Activity act, SparseArray<Nota> notas,MainActivity mainActivity) {
         activity = act;
         this.notas = notas;
         inflater = act.getLayoutInflater();
-        this.main = main;
+        this.mainActivity = mainActivity;
     }
 
     @Override
@@ -159,7 +159,7 @@ public class CustomExpandAdapter extends BaseExpandableListAdapter implements Vi
             intent.putExtras(dataBundle);
 
             activity.startActivity(intent);
-            activity.getFragmentManager().beginTransaction().replace(R.id.content_frame,new Frag1(main)).commit();
+            activity.getFragmentManager().beginTransaction().replace(R.id.content_frame,new AverageFragment(mainActivity)).commit();
         }else if(v == v.findViewById(R.id.btExcluirMateria)){
 
             final DBHelper meudb = new DBHelper(v.getContext());

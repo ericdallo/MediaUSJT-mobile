@@ -19,20 +19,20 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 @SuppressLint("ValidFragment")
-public class Frag2 extends Fragment {
+public class GradesFragment extends Fragment {
 
     public final static String NOME_ITEM = "Notas";
 
     DBHelper meudb;
     SparseArray<Nota> notas = new SparseArray<Nota>();
-    private Main main;
+    private MainActivity mainActivity;
 
     @SuppressLint("ValidFragment")
-    public Frag2(Main main) {
-        this.main = main;
+    public GradesFragment(MainActivity mainActivity) {
+        this.mainActivity = mainActivity;
     }
-    public Frag2(){
-        this.main = null;
+    public GradesFragment(){
+        this.mainActivity = null;
     }
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -50,7 +50,7 @@ public class Frag2 extends Fragment {
         final ArrayList<Nota> array_list = meudb.getAllNotas();
         transformaSparseArray(array_list);
 
-        final CustomExpandAdapter expandAdapter = new CustomExpandAdapter(getActivity(),notas,main);
+        final CustomExpandAdapter expandAdapter = new CustomExpandAdapter(getActivity(),notas, mainActivity);
 
         Button b = (Button) view.findViewById(R.id.btDeletarTudo);
 

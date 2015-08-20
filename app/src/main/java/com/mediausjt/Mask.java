@@ -1,5 +1,4 @@
 package com.mediausjt;
-
 import android.content.Context;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -12,13 +11,13 @@ import android.widget.EditText;
 
 public class Mask{
 
-    private Frag1 frag;
+    private AverageFragment frag;
     private CadastraNota cad;
     private String mask,stringAtual;
     private EditText ediTxt;
     private boolean aperto;
 
-    public Mask(Frag1 frag,String mask,EditText ediTxt){
+    public Mask(AverageFragment frag,String mask,EditText ediTxt){
         this.frag = frag;
         this.mask = mask;
         this.ediTxt = ediTxt;

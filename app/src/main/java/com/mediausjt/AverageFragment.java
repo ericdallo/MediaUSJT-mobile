@@ -1,4 +1,4 @@
-package mediausjt.com.br.mediausjt;
+package com.mediausjt;
 
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
@@ -20,22 +20,22 @@ import android.widget.Toast;
 
 
 @TargetApi(Build.VERSION_CODES.HONEYCOMB)
-public class Frag1 extends Fragment {
+public class AverageFragment extends Fragment {
 
     public static final String NOME_ITEM = "Calcular";
 
-    private final Main main;
+    private final MainActivity mainActivity;
 
     private EditText nota1;
     private EditText nota2;
     private EditText precisa1;
 
     @SuppressLint("ValidFragment")
-    public Frag1(Main main){
-        this.main = main;
+    public AverageFragment(MainActivity mainActivity){
+        this.mainActivity = mainActivity;
     }
-    public Frag1(){
-        this.main = null;
+    public AverageFragment(){
+        this.mainActivity = null;
     }
 
     @Override
@@ -147,7 +147,7 @@ public class Frag1 extends Fragment {
 
             snota2 = nota2.getText().toString();
 
-            SharedPreferences prefs = getMain().getPrefs();
+            SharedPreferences prefs = getMainActivity().getPrefs();
 
             double dpeso1 = (double)(prefs.getFloat("peso1",(float)0.4));
             double dpeso2 = (double)(prefs.getFloat("peso2",(float)0.6));
@@ -162,7 +162,7 @@ public class Frag1 extends Fragment {
                 double media = (n1 * dpeso1) + (n2 * dpeso2);
                 String fmedia = media + "";
 
-                EditText etResp1 = (EditText) main.findViewById(R.id.etResp1);
+                EditText etResp1 = (EditText) mainActivity.findViewById(R.id.etResp1);
                 // fmedia = arredonda(fmedia);
                 etResp1.setText(fmedia);
                 if (media < mediacurso)
@@ -176,7 +176,7 @@ public class Frag1 extends Fragment {
                 double precisa = (mediacurso - (n1 * dpeso1)) / dpeso2; //TODO ARRUMAR CONTA
                 String fprecisa = precisa + "";
 
-                EditText etPrecisa1 = (EditText) main.findViewById(R.id.etPrecisa1);
+                EditText etPrecisa1 = (EditText) mainActivity.findViewById(R.id.etPrecisa1);
                 etPrecisa1.setText(fprecisa);
                 if (precisa <= mediacurso)
                     Colore(0xFF13C300, etPrecisa1);
@@ -187,7 +187,7 @@ public class Frag1 extends Fragment {
         } catch (Exception e) {
             e.printStackTrace();
             String msg = "Informações incorretas...";
-            Context con = main.getApplicationContext();
+            Context con = mainActivity.getApplicationContext();
             //int tempo = 4000;
             Toast to = Toast.makeText(con, msg,Toast.LENGTH_SHORT);
             to.show();
@@ -196,12 +196,12 @@ public class Frag1 extends Fragment {
     }
 
     public void limpaCampoMedia() {
-        EditText etMedia1 = (EditText) main.findViewById(R.id.etResp1);
+        EditText etMedia1 = (EditText) mainActivity.findViewById(R.id.etResp1);
         etMedia1.setText("");
     }
 
     public void limpaCampoPrecisa() {
-        EditText etPrecisa1 = (EditText) main.findViewById(R.id.etPrecisa1);
+        EditText etPrecisa1 = (EditText) mainActivity.findViewById(R.id.etPrecisa1);
         etPrecisa1.setText("");
     }
 
@@ -209,8 +209,8 @@ public class Frag1 extends Fragment {
         et.setTextColor(cor);
     }
 
-    public Main getMain() {
-        return this.main;
+    public MainActivity getMainActivity() {
+        return this.mainActivity;
     }
     public EditText getEdit2() {
         return nota2;

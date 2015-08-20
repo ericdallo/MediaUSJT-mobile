@@ -14,6 +14,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -24,10 +25,8 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.mediausjt.R;
 
-
-public class Main extends ActionBarActivity{
+public class MainActivity extends ActionBarActivity{
 
     private Toolbar toolbar;
     private DrawerLayout drawerLayout;
@@ -80,7 +79,7 @@ public class Main extends ActionBarActivity{
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawerList = (ListView) findViewById(R.id.left_drawer);
 
-        drawerLayout.setDrawerShadow(R.drawable.drawer_shadow,1); //TODO mudar segundo parametro
+        drawerLayout.setDrawerShadow(R.drawable.drawer_shadow, Gravity.RIGHT); //TODO mudar segundo parametro
 
         // adiciona o item no arraylist
         infoList.add(new DrawerItem("Média", R.drawable.calculator));
@@ -91,7 +90,7 @@ public class Main extends ActionBarActivity{
         infoList.add(new DrawerItem("Contato", R.drawable.contato));
 
         adapter = new CustomDrawerAdapter(this, R.layout.custom_list_drawer,infoList);
-        adapter.setMain(this);
+        adapter.setMainActivity(this);
 
         drawerList.setAdapter(adapter);
 
@@ -134,18 +133,18 @@ public class Main extends ActionBarActivity{
 
         switch (posicao) {
             case 0:
-                frag = new Frag1(this);
-                args.putString(Frag1.NOME_ITEM, infoList.get(posicao).getItemNome());
+                frag = new AverageFragment(this);
+                args.putString(AverageFragment.NOME_ITEM, infoList.get(posicao).getItemNome());
                 ehFrag = true;
                 break;
             case 1:
-                frag = new Frag2(this);
-                args.putString(Frag2.NOME_ITEM, infoList.get(posicao).getItemNome());
+                frag = new GradesFragment(this);
+                args.putString(GradesFragment.NOME_ITEM, infoList.get(posicao).getItemNome());
                 ehFrag = true;
                 break;
             case 2:
-                frag = new Frag3(this);
-                args.putString(Frag3.NOME_ITEM, infoList.get(posicao).getItemNome());
+                frag = new WeightFragment(this);
+                args.putString(WeightFragment.NOME_ITEM, infoList.get(posicao).getItemNome());
                 ehFrag = true;
                 break;
             /*case 3:   //SWITCH

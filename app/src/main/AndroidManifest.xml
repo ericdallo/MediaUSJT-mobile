@@ -1,5 +1,4 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="mediausjt.com.br.mediausjt">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.mediausjt">
 
     <application 
 	android:allowBackup="true" 
@@ -7,18 +6,19 @@
         android:icon="@mipmap/usjticon" 
 	android:theme="@style/AppTheme">
 	<activity
-            android:name="mediausjt.com.br.mediausjt.Main"
+            android:name="com.mediausjt.MainActivity"
             android:label="@string/app_name"
             android:configChanges="keyboardHidden|screenSize"
             android:windowSoftInputMode="stateHidden"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait">>
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
-            android:name="mediausjt.com.br.mediausjt.CadastraNota"
+            android:name="com.mediausjt.CadastraNota"
             android:label="@string/app_name"
             android:theme="@style/AppTheme"/>
     </application>
