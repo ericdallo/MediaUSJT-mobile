@@ -1,0 +1,72 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    android:orientation="vertical"
+
+     >
+
+    <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="20dp"
+        android:alpha=".40"
+        android:contentDescription="@string/descrUSJT"
+        android:src="@drawable/usjtflat" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Notas Mínimas Salvas"
+        android:id="@+id/tvTituloNota"
+        android:textStyle="bold"
+        android:textColor="@color/AzulMedio"
+        android:minHeight="40dp"
+        android:background="@drawable/flat_button_2"
+        android:textSize="22sp"
+        android:gravity="center"
+        />
+
+    <ExpandableListView
+        android:layout_marginTop="40dp"
+        android:id="@+id/listView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbarStyle="insideOverlay"
+
+
+        >
+
+    </ExpandableListView>
+
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true" >
+
+        <LinearLayout
+            android:id="@+id/fullscreen_content_controls"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|clip_horizontal"
+            android:orientation="horizontal"
+            >
+
+            <Button
+                android:id="@+id/btDeletarTudo"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/flat_botao"
+                android:text="@string/deletarTudo"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp" />
+
+
+
+        </LinearLayout>
+
+    </FrameLayout>
+</FrameLayout>

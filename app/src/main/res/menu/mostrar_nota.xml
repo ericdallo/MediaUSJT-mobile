@@ -1,0 +1,17 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:mediausjtcode="http://schemas.android.com/apk/res-auto"
+    >
+    <item
+        android:id="@+id/Editar_Contato"
+        android:orderInCategory="100"
+        mediausjtcode:showAsAction="always"
+
+        android:title="@string/editarMenu"/>
+    <item
+        android:id="@+id/Deletar_Contato"
+        android:orderInCategory="100"
+        mediausjtcode:showAsAction="always"
+
+        android:title="@string/deletarMenu"/>
+
+</menu>

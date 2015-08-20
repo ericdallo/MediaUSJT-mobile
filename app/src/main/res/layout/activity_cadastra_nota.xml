@@ -1,0 +1,115 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/FrameView1"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    android:orientation="vertical"
+    tools:context=".CadastraNota" >
+
+    <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="20dp"
+        android:alpha=".40"
+        android:contentDescription="@string/descrUSJT"
+        android:src="@drawable/usjtflat" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:orientation="vertical"
+        android:background="@color/Branco">
+
+        <TextView
+            android:id="@+id/tvMateria"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/cadastramentoNome"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/AzulMedio"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_marginTop="10dp"
+            android:gravity="center_horizontal"
+            android:typeface="normal" />
+
+        <EditText
+            android:id="@+id/etMateria"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textColor="@color/AzulMedio"
+            android:textSize="25dp"
+            android:gravity="bottom|center_horizontal"
+            android:text="8.9"
+            android:ems="10"
+            android:inputType="text"
+            android:maxLength="22" >
+        </EditText>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_marginTop="100dp"
+        android:background="@color/Branco"
+        android:orientation="vertical"
+        >
+        <TextView
+            android:id="@+id/tvNotaCadastro"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="@string/cadastramentoNota"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/AzulMedio"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_marginTop="10dp"
+            android:typeface="normal" />
+
+        <EditText
+            android:id="@+id/etNotaCadastro"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:imeOptions="actionDone"
+            android:inputType="numberDecimal"
+            android:gravity="bottom|center_horizontal"
+            android:text="8.9"
+            android:clickable="false"
+            android:editable="false"
+            android:textColor="@color/AzulMedio"
+            android:ems="10"
+            android:maxLength="3"
+            android:textSize="45sp"/>
+    </LinearLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true" >
+
+        <LinearLayout
+            android:id="@+id/fullscreen_content_controls1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|clip_horizontal"
+            android:background="@drawable/flat_botao"
+            android:orientation="horizontal"
+            tools:ignore="UselessParent" >
+
+            <Button
+                android:id="@+id/btSalvar1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/flat_botao"
+                android:onClick="salvaNota"
+                android:text="@string/salvar"
+                android:textColor="#FFFFFF"
+                android:textSize="25sp" />
+        </LinearLayout>
+    </FrameLayout>
+
+</FrameLayout>

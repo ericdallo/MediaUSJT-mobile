@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    android:orientation="vertical"
+    tools:context="com.mediausjt.FullscreenActivity" >
+
+    <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:alpha=".40"
+        android:contentDescription="@string/descrUSJT"
+        android:src="@drawable/usjtflat" />
+
+    <RelativeLayout
+        android:id="@+id/layRelativeMain3"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <TextView
+            android:id="@+id/tvTituloPeso"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="@string/tvTituloPeso"
+            android:textColor="@color/AzulMedio"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:typeface="normal" />
+
+        <TextView
+            android:id="@+id/tvPeso1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvTituloPeso"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:keepScreenOn="false"
+            android:text="@string/tvPeso1"
+            android:textColor="@color/AzulMedio"
+            android:textSize="18sp"/>
+
+        <SeekBar
+            android:id="@+id/seekbar1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvPeso1"
+            android:transitionGroup="true"
+            android:drawSelectorOnTop="true"
+            android:layout_marginTop="5dp"
+            android:gravity="center_horizontal"
+            android:prompt="@string/promptPeso"
+            />
+
+        <TextView
+            android:id="@+id/tvPeso2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/seekbar1"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:keepScreenOn="false"
+            android:text="@string/tvPeso2"
+            android:textColor="@color/AzulMedio"
+            android:textSize="18sp"
+            android:typeface="serif" />
+
+        <SeekBar
+            android:id="@+id/seekbar2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawSelectorOnTop="true"
+            android:layout_below="@+id/tvPeso2"
+            android:layout_marginTop="5dp"
+            android:prompt="@string/promptPeso" />
+
+        <TextView
+            android:id="@+id/tvTituloMedia"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Média"
+            android:layout_below="@+id/seekbar2"
+            android:layout_marginTop="5dp"
+            android:gravity="center"
+            android:keepScreenOn="false"
+            android:textColor="@color/AzulMedio"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:typeface="normal"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="6"
+            android:id="@+id/tvMedia"
+            android:layout_below="@+id/tvTituloMedia"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:keepScreenOn="false"
+            android:textColor="@color/AzulMedio"
+            android:textSize="24sp"/>
+        <SeekBar
+            android:id="@+id/seekbar3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawSelectorOnTop="true"
+            android:layout_below="@+id/tvMedia"
+            android:prompt="@string/promptPeso" />
+    </RelativeLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true" >
+
+        <LinearLayout
+            android:id="@+id/fullscreen_content_controls"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|clip_horizontal"
+            android:orientation="horizontal"
+            tools:ignore="UselessParent" >
+
+            <Button
+                android:id="@+id/btMudarPeso"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/flat_botao"
+                android:text="@string/mudarPeso"
+                android:textColor="@color/Branco"
+                android:textSize="25sp" />
+        </LinearLayout>
+    </FrameLayout>
+
+</FrameLayout>
