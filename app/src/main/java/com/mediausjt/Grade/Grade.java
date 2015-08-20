@@ -1,14 +1,14 @@
-package com.mediausjt;
+package com.mediausjt.Grade;
 /**
  * Created by eric on 09/03/15.
  */
-public class Nota {
+public class Grade {
     private int id;
     private String materia;
     private String nota;
 
 
-    public Nota(int id,String materia,String nota){
+    public Grade(int id, String materia, String nota){
         setId(id);
         setMateria(materia);
         setNota(nota);

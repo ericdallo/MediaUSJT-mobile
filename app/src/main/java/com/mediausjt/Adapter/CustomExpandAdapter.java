@@ -1,4 +1,4 @@
-package com.mediausjt;
+package com.mediausjt.Adapter;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -17,6 +17,13 @@ import android.widget.CheckedTextView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.mediausjt.Application.MainActivity;
+import com.mediausjt.Database.DBHelper;
+import com.mediausjt.Fragment.AverageFragment;
+import com.mediausjt.Grade.Grade;
+import com.mediausjt.Grade.NewGradeActivity;
+import com.mediausjt.R;
+
 import java.io.Serializable;
 
 
@@ -25,7 +32,7 @@ import java.io.Serializable;
  */
 public class CustomExpandAdapter extends BaseExpandableListAdapter implements View.OnClickListener,Serializable {
 
-    private final SparseArray<Nota> notas;
+    private final SparseArray<Grade> notas;
     public LayoutInflater inflater;
     public Activity activity;
     TextView tvNota,tvMateria;
@@ -33,7 +40,7 @@ public class CustomExpandAdapter extends BaseExpandableListAdapter implements Vi
     private MainActivity mainActivity;
 
 
-    public CustomExpandAdapter(Activity act, SparseArray<Nota> notas,MainActivity mainActivity) {
+    public CustomExpandAdapter(Activity act, SparseArray<Grade> notas,MainActivity mainActivity) {
         activity = act;
         this.notas = notas;
         inflater = act.getLayoutInflater();
@@ -65,7 +72,7 @@ public class CustomExpandAdapter extends BaseExpandableListAdapter implements Vi
         tvNota = (TextView) v.findViewById(R.id.textView2);
 
 
-        tvMateria.setText("Nota Mínima");
+        tvMateria.setText("Grade Mínima");
 
         String nota = notas.get(groupPosition).getNota();
         if(Double.parseDouble(nota) > 6.0)
@@ -129,8 +136,8 @@ public class CustomExpandAdapter extends BaseExpandableListAdapter implements Vi
         if (convertView == null) {
             convertView = inflater.inflate(R.layout.listrow_group, null);
         }
-        Nota nota = (Nota) getGroup(groupPosition);
-        ((CheckedTextView) convertView).setText(nota.getMateria());
+        Grade grade = (Grade) getGroup(groupPosition);
+        ((CheckedTextView) convertView).setText(grade.getMateria());
         ((CheckedTextView) convertView).setChecked(isExpanded);
         grupoAtual = groupPosition;
 
@@ -151,7 +158,7 @@ public class CustomExpandAdapter extends BaseExpandableListAdapter implements Vi
     @Override
     public void onClick(View v) {
         if(v == v.findViewById(R.id.btEditarMateria)){
-            Intent intent = new Intent(activity,CadastraNota.class);
+            Intent intent = new Intent(activity,NewGradeActivity.class);
             intent.putExtra("materia", notas.get(grupoAtual).getMateria());
             intent.putExtra("notaMinima",tvNota.getText().toString());
             Bundle dataBundle = new Bundle();
@@ -173,7 +180,7 @@ public class CustomExpandAdapter extends BaseExpandableListAdapter implements Vi
                     int position = notas.get((int)mView.getTag()).getId();
                     meudb.deletarNota(position);
                     notifyDataSetChanged();
-                    Toast.makeText(activity,"Nota Excluida", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(activity,"Grade Excluida", Toast.LENGTH_SHORT).show();
 
                     activity.recreate();
                 }

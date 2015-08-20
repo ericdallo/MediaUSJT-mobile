@@ -1,4 +1,4 @@
-package com.mediausjt;
+package com.mediausjt.Adapter;
 
 /**
  * Created by eric on 08/03/15.
@@ -13,6 +13,10 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.mediausjt.Application.MainActivity;
+import com.mediausjt.Item.DrawerItem;
+import com.mediausjt.R;
 
 import java.util.List;
 

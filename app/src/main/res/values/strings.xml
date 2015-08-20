@@ -21,14 +21,14 @@
     <string name="conteudo">Contato</string>
     <string name="editarMenu">Editar</string>
     <string name="deletarMenu">Excluir</string>
-    <string name="msg1">Bem-vindo ao Média USJT.\n\n•  Se deseja saber sua nota anual, informe sua nota nos dois campos.\n\n•  Se deseja saber qual nota precisa tirar no 2°semestre, informe a nota do 1°semestre.\n\n•  Para cadastrar uma nota,faça o cálculo da nota mínima, e em seguida pressione o botão \"Salvar Nota\".\n\n•  Para ver a nota cadastrada,vá para a aba \"Notas Mínimas Cadastradas\".\nPara alteração da nota, escolha a nota e escolha a opção \"Excluir\" ou \"Editar\".\n\n•  Caso deseje alterar o peso ou média do cálculo, na aba \"Pesos\", selecione o valor dos pesos ou média.</string>
-    <string name="msg2">Tem novas idéias?\n\nAlgum problema com o aplicativo?\n\nE-mail: eric.dallo06@hotmail.com\n</string>
+    <string name="msg1">Bem-vindo ao Média USJT.\n\n•  Se deseja saber sua grade anual, informe sua grade nos dois campos.\n\n•  Se deseja saber qual grade precisa tirar no 2°semestre, informe a grade do 1°semestre.\n\n•  Para cadastrar uma grade,faça o cálculo da grade mínima, e em seguida pressione o botão \"Salvar Nota\".\n\n•  Para ver a grade cadastrada,vá para a aba \"Notas Mínimas Cadastradas\".\nPara alteração da grade, escolha a grade e escolha a opção \"Excluir\" ou \"Editar\".\n\n•  Caso deseje alterar o peso ou média do cálculo, na aba \"Pesos\", selecione o valor dos pesos ou média.</string>
+    <string name="msg2">Tem novas idéias?\n\nAlgum problema com o aplicativo?\n\nE-mail: mediausjt@gmail.com\n</string>
     <string name="deletarTodasNotas">Você tem certeza que deseja excluir todas as notas ?</string>
-    <string name="deletarNota">Você tem certeza que deseja excluir essa nota ?</string>
+    <string name="deletarNota">Você tem certeza que deseja excluir essa grade ?</string>
     <string name="sim">Sim</string>
     <string name="nao">Nao</string>
 
-    <string name="promptPeso">Escolha o peso da nota</string>
+    <string name="promptPeso">Escolha o peso da grade</string>
 
     <string name="tvTituloPeso">Peso das Notas</string>
     <string name="tvPeso1">Peso 1°semestre</string>

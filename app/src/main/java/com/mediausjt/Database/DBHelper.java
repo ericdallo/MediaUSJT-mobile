@@ -1,13 +1,14 @@
-package com.mediausjt;
-
-import java.util.ArrayList;
-import java.util.HashMap;
+package com.mediausjt.Database;
 
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
+
+import com.mediausjt.Grade.Grade;
+
+import java.util.ArrayList;
 
 public class DBHelper extends SQLiteOpenHelper {
 
@@ -16,8 +17,6 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String NOTAS_COLUMN_ID = "id";
     public static final String NOTAS_COLUMN_MATERIA = "materia";
     public static final String NOTAS_COLUMN_NOTA = "nota";
-
-    private HashMap<?, ?> hp;
 
     public DBHelper(Context context) {
         super(context, DATABASE_NAME, null, 1);
@@ -72,18 +71,15 @@ public class DBHelper extends SQLiteOpenHelper {
         db.delete(NOTAS_TABLE_NAME,null,null);
     }
 
-
-
-    public ArrayList<Nota> getAllNotas(){
-        ArrayList<Nota> array_list = new ArrayList<Nota>();
-        hp = new HashMap<Object,Object>();
+    public ArrayList<Grade> getAllNotas(){
+        ArrayList<Grade> array_list = new ArrayList<Grade>();
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor res = db.rawQuery("select * from notas",null);
         res.moveToFirst();
-        Nota nota;
+        Grade grade;
         while(!res.isAfterLast()){
-            nota = new Nota(res.getInt(res.getColumnIndex(NOTAS_COLUMN_ID)),res.getString(res.getColumnIndex(NOTAS_COLUMN_MATERIA)),res.getString(res.getColumnIndex(NOTAS_COLUMN_NOTA)));
-            array_list.add(nota);
+            grade = new Grade(res.getInt(res.getColumnIndex(NOTAS_COLUMN_ID)),res.getString(res.getColumnIndex(NOTAS_COLUMN_MATERIA)),res.getString(res.getColumnIndex(NOTAS_COLUMN_NOTA)));
+            array_list.add(grade);
             res.moveToNext();
         }
         return array_list;

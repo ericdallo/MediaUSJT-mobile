@@ -1,4 +1,4 @@
-package com.mediausjt;
+package com.mediausjt.Grade;
 /**
  * Created by eric on 09/03/15.
  */
@@ -11,10 +11,14 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.mediausjt.Database.DBHelper;
+import com.mediausjt.Util.MaskedInput;
+import com.mediausjt.R;
+
 import java.io.Serializable;
 
 
-public class CadastraNota extends ActionBarActivity implements Serializable{
+public class NewGradeActivity extends ActionBarActivity implements Serializable{
     private DBHelper meudb;
     private TextView tvmateria,tvnota;
     private EditText etmateria,etnota;
@@ -70,8 +74,8 @@ public class CadastraNota extends ActionBarActivity implements Serializable{
         }
 
         //mascara
-        Mask mask = new Mask(this,"#.#",etnota);
-        etnota.addTextChangedListener(mask.insert());
+        MaskedInput maskedInput = new MaskedInput(this,"#.#",etnota);
+        etnota.addTextChangedListener(maskedInput.insert());
     }
 
 
@@ -100,9 +104,9 @@ public class CadastraNota extends ActionBarActivity implements Serializable{
 
                 } else {
                     if (meudb.inserirNota(snomeMateria, inota + ""))
-                        Toast.makeText(getApplicationContext(), "Nota Salva",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "Grade Salva",Toast.LENGTH_SHORT).show();
                     else
-                        Toast.makeText(getApplicationContext(), "Nota não Salva",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "Grade não Salva",Toast.LENGTH_SHORT).show();
 
                     finish();
                 }

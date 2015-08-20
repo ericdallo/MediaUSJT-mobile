@@ -1,4 +1,4 @@
-package com.mediausjt;
+package com.mediausjt.Application;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
@@ -22,6 +22,13 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.mediausjt.Adapter.CustomDrawerAdapter;
+import com.mediausjt.Item.DrawerItem;
+import com.mediausjt.Fragment.AverageFragment;
+import com.mediausjt.Fragment.GradesFragment;
+import com.mediausjt.Fragment.WeightFragment;
+import com.mediausjt.R;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,14 +41,11 @@ public class MainActivity extends ActionBarActivity{
     private ActionBarDrawerToggle drawerToggle;
 
     private CharSequence drawerTitulo;
-    private CharSequence titulo;
+    private CharSequence title;
     private CustomDrawerAdapter adapter;
 
     private List<DrawerItem> infoList;
 
-    private String peso1Setado = "";
-    private String peso2Setado = "";
-    private boolean ami;
     private SharedPreferences prefs;
 
     @SuppressLint("NewApi")
@@ -75,7 +79,7 @@ public class MainActivity extends ActionBarActivity{
         // Inicializando o drawer
 
         infoList = new ArrayList<DrawerItem>();
-        titulo = drawerTitulo = getTitle();
+        title = drawerTitulo = getTitle();
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawerList = (ListView) findViewById(R.id.left_drawer);
 
@@ -85,7 +89,6 @@ public class MainActivity extends ActionBarActivity{
         infoList.add(new DrawerItem("Média", R.drawable.calculator));
         infoList.add(new DrawerItem("Notas", R.drawable.notes));
         infoList.add(new DrawerItem("Peso", R.drawable.pesos));
-        //infoList.add(new DrawerItem("A.M.I",R.drawable.notepad,true));
         infoList.add(new DrawerItem("Informações", R.drawable.info));
         infoList.add(new DrawerItem("Contato", R.drawable.contato));
 
@@ -107,7 +110,7 @@ public class MainActivity extends ActionBarActivity{
         drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar,R.string.drawer_open, R.string.drawer_close) {
 
             public void onDrawerClosed(View view) {
-                getSupportActionBar().setTitle(titulo);
+                getSupportActionBar().setTitle(title);
                 invalidateOptionsMenu(); // creates call to
                 // onPrepareOptionsMenu()
             }
@@ -123,33 +126,30 @@ public class MainActivity extends ActionBarActivity{
         drawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
 
         if(savedInstanceState == null)
-            selecionarItem(0);
+            selectItem(0);
     }
 
-    public void selecionarItem(int posicao) {
-        Fragment frag = null;
-        Bundle args = new Bundle();
-        boolean ehFrag;
+    public void selectItem(int position) {
+        Fragment fragment = null;
+        Bundle bundle = new Bundle();
+        boolean isFrag;
 
-        switch (posicao) {
+        switch (position) {
             case 0:
-                frag = new AverageFragment(this);
-                args.putString(AverageFragment.NOME_ITEM, infoList.get(posicao).getItemNome());
-                ehFrag = true;
+                fragment = new AverageFragment(this);
+                bundle.putString(AverageFragment.NOME_ITEM, infoList.get(position).getItemNome());
+                isFrag = true;
                 break;
             case 1:
-                frag = new GradesFragment(this);
-                args.putString(GradesFragment.NOME_ITEM, infoList.get(posicao).getItemNome());
-                ehFrag = true;
+                fragment = new GradesFragment(this);
+                bundle.putString(GradesFragment.NOME_ITEM, infoList.get(position).getItemNome());
+                isFrag = true;
                 break;
             case 2:
-                frag = new WeightFragment(this);
-                args.putString(WeightFragment.NOME_ITEM, infoList.get(posicao).getItemNome());
-                ehFrag = true;
+                fragment = new WeightFragment(this);
+                bundle.putString(WeightFragment.NOME_ITEM, infoList.get(position).getItemNome());
+                isFrag = true;
                 break;
-            /*case 3:   //SWITCH
-                ehFrag = false;
-                break;*/
             case 3:   //Informacoes
                 try {
                     AlertDialog alertDialog = new AlertDialog.Builder(this).create();
@@ -166,7 +166,7 @@ public class MainActivity extends ActionBarActivity{
                 } catch (Exception e) {
                     Toast.makeText(getApplicationContext(), getString(R.string.msg1), Toast.LENGTH_LONG).show();
                 }
-                ehFrag = false;
+                isFrag = false;
                 break;
             case 4: // CONtato
                 try {
@@ -183,19 +183,19 @@ public class MainActivity extends ActionBarActivity{
                 } catch (Exception e) {
                     Toast.makeText(getApplicationContext(), getString(R.string.msg2), Toast.LENGTH_LONG).show();
                 }
-                ehFrag = false;
+                isFrag = false;
                 break;
             default:
-                ehFrag = false;
+                isFrag = false;
                 break;
         }
-        if(ehFrag){
-            frag.setArguments(args);
+        if(isFrag){
+            fragment.setArguments(bundle);
             FragmentManager fmanager = getFragmentManager();
-            fmanager.beginTransaction().replace(R.id.content_frame, frag).commit();
+            fmanager.beginTransaction().replace(R.id.content_frame, fragment).commit();
 
-            drawerList.setItemChecked(posicao, true);
-            setTitle(infoList.get(posicao).getItemNome());
+            drawerList.setItemChecked(position, true);
+            setTitle(infoList.get(position).getItemNome());
         }
 
 
@@ -206,8 +206,8 @@ public class MainActivity extends ActionBarActivity{
 
     @Override
     public void setTitle(CharSequence title){
-        titulo = title;
-        getSupportActionBar().setTitle(titulo);
+        this.title = title;
+        getSupportActionBar().setTitle(this.title);
 
     }
 
@@ -254,33 +254,15 @@ public class MainActivity extends ActionBarActivity{
         drawerToggle.onConfigurationChanged(newConfig);
     }
 
-
-    public void setAmi(boolean ami) {
-        this.ami = ami;
-    }
-
-    public void setPeso1Setado(String peso1Setado) {
-        this.peso1Setado = peso1Setado;
-    }
-
-    public void setPeso2Setado(String peso2Setado) {
-        this.peso2Setado = peso2Setado;
-    }
-
-    public boolean isAmi() {
-        return ami;
-    }
-
     public SharedPreferences getPrefs() {
         return prefs;
     }
-
 
     private class DrawerItemClickListener implements ListView.OnItemClickListener{
 
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            selecionarItem(position);
+            selectItem(position);
         }
     }
 

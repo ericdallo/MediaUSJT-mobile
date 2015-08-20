@@ -1,4 +1,4 @@
-package com.mediausjt;
+package com.mediausjt.Fragment;
 
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
@@ -17,6 +17,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.mediausjt.Application.MainActivity;
+import com.mediausjt.Util.MaskedInput;
+import com.mediausjt.Grade.NewGradeActivity;
+import com.mediausjt.R;
 
 
 @TargetApi(Build.VERSION_CODES.HONEYCOMB)
@@ -85,7 +90,7 @@ public class AverageFragment extends Fragment {
                 } else {
                     Bundle dataBundle = new Bundle();
                     dataBundle.putInt("id", 0);
-                    Intent intent = new Intent(getActivity(),CadastraNota.class);
+                    Intent intent = new Intent(getActivity(),NewGradeActivity.class);
                     intent.putExtras(dataBundle);
                     intent.putExtra("notaMinima", sprecisa1);
                     int corNotaMinima;
@@ -105,28 +110,28 @@ public class AverageFragment extends Fragment {
         });
 
         //mascara
-        final Mask mask = new Mask(this, "#.#", nota1);
-        nota1.addTextChangedListener(mask.insert());
+        final MaskedInput maskedInput = new MaskedInput(this, "#.#", nota1);
+        nota1.addTextChangedListener(maskedInput.insert());
         nota1.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
                 if(keyCode == KeyEvent.KEYCODE_0)
-                    mask.Aperto0(true);
+                    maskedInput.Aperto0(true);
                 else
-                    mask.Aperto0(false);
+                    maskedInput.Aperto0(false);
                 return false;
             }
         });
-        final Mask mask2 = new Mask(this, "#.#", nota2);
+        final MaskedInput maskedInput2 = new MaskedInput(this, "#.#", nota2);
 
-        nota2.addTextChangedListener(mask2.insert());
+        nota2.addTextChangedListener(maskedInput2.insert());
         nota2.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
                 if(keyCode == KeyEvent.KEYCODE_0)
-                    mask2.Aperto0(true);
+                    maskedInput2.Aperto0(true);
                 else
-                    mask2.Aperto0(false);
+                    maskedInput2.Aperto0(false);
                 return false;
             }
         });

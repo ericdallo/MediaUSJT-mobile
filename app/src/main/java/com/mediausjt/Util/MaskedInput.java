@@ -1,30 +1,33 @@
-package com.mediausjt;
+package com.mediausjt.Util;
 import android.content.Context;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
+import com.mediausjt.Fragment.AverageFragment;
+import com.mediausjt.Grade.NewGradeActivity;
+
 /**
  * Created by eric on 13/03/15.
  */
 
-public class Mask{
+public class MaskedInput {
 
     private AverageFragment frag;
-    private CadastraNota cad;
+    private NewGradeActivity cad;
     private String mask,stringAtual;
     private EditText ediTxt;
     private boolean aperto;
 
-    public Mask(AverageFragment frag,String mask,EditText ediTxt){
+    public MaskedInput(AverageFragment frag, String mask, EditText ediTxt){
         this.frag = frag;
         this.mask = mask;
         this.ediTxt = ediTxt;
         this.cad = null;
     }
 
-    public Mask(CadastraNota cad,String mask,EditText ediTxt){
+    public MaskedInput(NewGradeActivity cad, String mask, EditText ediTxt){
         this.frag = null;
         this.mask = mask;
         this.ediTxt = ediTxt;

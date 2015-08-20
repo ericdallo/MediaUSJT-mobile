@@ -1,7 +1,4 @@
-package com.mediausjt;
-/**
- * Created by eric on 08/03/15.
- */
+package com.mediausjt.Item;
 
 public class DrawerItem {
 
@@ -9,9 +6,7 @@ public class DrawerItem {
     int imgID;
     //boolean isSwitch;
 
-
     public DrawerItem(String nome, int ID) {
-        super();
         itemNome = nome;
         this.imgID = ID;
     }
@@ -26,7 +21,7 @@ public class DrawerItem {
     public String getItemNome() {
         return itemNome;
     }
-    public void setItemNome(String nome) {
+    public void setItemNome(String nome){
         this.itemNome = nome;
     }
     public int getImgID() {

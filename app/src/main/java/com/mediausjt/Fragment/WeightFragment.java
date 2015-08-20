@@ -1,4 +1,4 @@
-package com.mediausjt;
+package com.mediausjt.Fragment;
 
 import android.annotation.SuppressLint;
 import android.app.Fragment;
@@ -12,6 +12,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.SeekBar;
 import android.widget.TextView;
+
+import com.mediausjt.Application.MainActivity;
+import com.mediausjt.R;
 
 
 public class WeightFragment extends Fragment implements SeekBar.OnSeekBarChangeListener{

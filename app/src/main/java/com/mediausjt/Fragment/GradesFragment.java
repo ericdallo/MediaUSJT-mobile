@@ -1,4 +1,4 @@
-package com.mediausjt;
+package com.mediausjt.Fragment;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
@@ -16,6 +16,12 @@ import android.widget.ExpandableListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.mediausjt.Adapter.CustomExpandAdapter;
+import com.mediausjt.Database.DBHelper;
+import com.mediausjt.Application.MainActivity;
+import com.mediausjt.Grade.Grade;
+import com.mediausjt.R;
+
 import java.util.ArrayList;
 
 @SuppressLint("ValidFragment")
@@ -24,7 +30,7 @@ public class GradesFragment extends Fragment {
     public final static String NOME_ITEM = "Notas";
 
     DBHelper meudb;
-    SparseArray<Nota> notas = new SparseArray<Nota>();
+    SparseArray<Grade> notas = new SparseArray<Grade>();
     private MainActivity mainActivity;
 
     @SuppressLint("ValidFragment")
@@ -47,7 +53,7 @@ public class GradesFragment extends Fragment {
         final Context c = getActivity().getApplicationContext();
 
         meudb = new DBHelper(c);
-        final ArrayList<Nota> array_list = meudb.getAllNotas();
+        final ArrayList<Grade> array_list = meudb.getAllNotas();
         transformaSparseArray(array_list);
 
         final CustomExpandAdapter expandAdapter = new CustomExpandAdapter(getActivity(),notas, mainActivity);
@@ -84,10 +90,10 @@ public class GradesFragment extends Fragment {
         return view;
     }
 
-    public void transformaSparseArray(ArrayList<Nota> array_list) {
+    public void transformaSparseArray(ArrayList<Grade> array_list) {
         for(int i = 0; i< array_list.size();i++){
-           Nota nota = new Nota(array_list.get(i).getId(),array_list.get(i).getMateria(),array_list.get(i).getNota());
-            notas.append(i, nota);
+           Grade grade = new Grade(array_list.get(i).getId(),array_list.get(i).getMateria(),array_list.get(i).getNota());
+            notas.append(i, grade);
         }
     }
 

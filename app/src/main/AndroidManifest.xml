@@ -6,7 +6,7 @@
         android:icon="@mipmap/usjticon" 
 	android:theme="@style/AppTheme">
 	<activity
-            android:name="com.mediausjt.MainActivity"
+            android:name=".Application.MainActivity"
             android:label="@string/app_name"
             android:configChanges="keyboardHidden|screenSize"
             android:windowSoftInputMode="stateHidden"
@@ -18,7 +18,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.mediausjt.CadastraNota"
+            android:name=".Grade.NewGradeActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme"/>
     </application>
