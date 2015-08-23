@@ -15,7 +15,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.mediausjt.Application.MainActivity;
-import com.mediausjt.Item.DrawerItem;
+import com.mediausjt.Item.NavegationDrawerItem;
 import com.mediausjt.R;
 
 import java.util.List;
@@ -23,14 +23,14 @@ import java.util.List;
 
 
 
-public class CustomDrawerAdapter extends ArrayAdapter<DrawerItem> {
+public class CustomDrawerAdapter extends ArrayAdapter<NavegationDrawerItem> {
 
     private Context context;
-    private List<DrawerItem> drawerItens;
+    private List<NavegationDrawerItem> drawerItens;
     private int layoutResID;
     private MainActivity mainActivity;
 
-    public CustomDrawerAdapter(Context context, int layoutResourceID,List<DrawerItem> listItems) {
+    public CustomDrawerAdapter(Context context, int layoutResourceID,List<NavegationDrawerItem> listItems) {
         super(context, layoutResourceID, listItems);
         this.context = context;
         this.drawerItens = listItems;
@@ -73,7 +73,7 @@ public class CustomDrawerAdapter extends ArrayAdapter<DrawerItem> {
 
         }
 
-        DrawerItem dItem = this.drawerItens.get(position);
+        NavegationDrawerItem dItem = this.drawerItens.get(position);
 
         /*if(dItem.isSwitch()) {
             drawerHolder.textlayout.setVisibility(LinearLayout.INVISIBLE);

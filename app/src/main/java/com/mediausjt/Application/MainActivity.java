@@ -23,7 +23,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.mediausjt.Adapter.CustomDrawerAdapter;
-import com.mediausjt.Item.DrawerItem;
+import com.mediausjt.Item.NavegationDrawerItem;
 import com.mediausjt.Fragment.AverageFragment;
 import com.mediausjt.Fragment.GradesFragment;
 import com.mediausjt.Fragment.WeightFragment;
@@ -44,7 +44,7 @@ public class MainActivity extends ActionBarActivity{
     private CharSequence title;
     private CustomDrawerAdapter adapter;
 
-    private List<DrawerItem> infoList;
+    private List<NavegationDrawerItem> infoList;
 
     private SharedPreferences prefs;
 
@@ -78,7 +78,7 @@ public class MainActivity extends ActionBarActivity{
 
         // Inicializando o drawer
 
-        infoList = new ArrayList<DrawerItem>();
+        infoList = new ArrayList<NavegationDrawerItem>();
         title = drawerTitulo = getTitle();
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawerList = (ListView) findViewById(R.id.left_drawer);
@@ -86,11 +86,11 @@ public class MainActivity extends ActionBarActivity{
         drawerLayout.setDrawerShadow(R.drawable.drawer_shadow, Gravity.RIGHT); //TODO mudar segundo parametro
 
         // adiciona o item no arraylist
-        infoList.add(new DrawerItem("Média", R.drawable.calculator));
-        infoList.add(new DrawerItem("Notas", R.drawable.notes));
-        infoList.add(new DrawerItem("Peso", R.drawable.pesos));
-        infoList.add(new DrawerItem("Informações", R.drawable.info));
-        infoList.add(new DrawerItem("Contato", R.drawable.contato));
+        infoList.add(new NavegationDrawerItem("Média", R.drawable.calculator));
+        infoList.add(new NavegationDrawerItem("Notas", R.drawable.notes));
+        infoList.add(new NavegationDrawerItem("Peso", R.drawable.pesos));
+        infoList.add(new NavegationDrawerItem("Informações", R.drawable.info));
+        infoList.add(new NavegationDrawerItem("Contato", R.drawable.contato));
 
         adapter = new CustomDrawerAdapter(this, R.layout.custom_list_drawer,infoList);
         adapter.setMainActivity(this);
