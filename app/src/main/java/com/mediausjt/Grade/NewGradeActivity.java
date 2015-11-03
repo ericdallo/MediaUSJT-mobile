@@ -1,115 +1,102 @@
 package com.mediausjt.Grade;
-/**
- * Created by eric on 09/03/15.
- */
+
 import android.database.Cursor;
-import android.graphics.Typeface;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
+import android.support.design.widget.Snackbar;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.mediausjt.Database.DBHelper;
-import com.mediausjt.Util.MaskedInput;
 import com.mediausjt.R;
+import com.mediausjt.Util.MaskedInput;
+import com.mediausjt.Util.MediaConfig;
+import com.mediausjt.util.MediaDialog;
 
-import java.io.Serializable;
+import butterknife.Bind;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 
+public class NewGradeActivity extends AppCompatActivity {
 
-public class NewGradeActivity extends ActionBarActivity implements Serializable{
-    private DBHelper meudb;
-    private TextView tvmateria,tvnota;
-    private EditText etmateria,etnota;
-    private int id_To_Update = 0;
-    private Typeface font,font2;
+    @Bind(R.id.tv_matter)
+    TextView tvMatter;
+    @Bind(R.id.etMatter)
+    EditText etMatter;
+    @Bind(R.id.tv_new_grade)
+    TextView tvNewGrade;
+    @Bind(R.id.et_new_grade)
+    EditText etNewGrade;
+
+    private DBHelper dbHelper = new DBHelper(this);
+    private int idToUpdate = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_cadastra_nota);
+        setContentView(R.layout.activity_new_grade);
+        ButterKnife.bind(this);
 
-        //pega a fonte
-        font = Typeface.createFromAsset(getAssets(), "fonts/aller.ttf");
-        font2 = Typeface.createFromAsset(getAssets(), "fonts/onramp.ttf");
+        MediaConfig.addFirstFontTo(tvMatter);
+        MediaConfig.addFirstFontTo(tvNewGrade);
+        MediaConfig.addSecondFontTo(etNewGrade);
 
-        tvmateria = (TextView) findViewById(R.id.tvMateria);
-        tvmateria.setTypeface(font);
+        String requiredGrade = getIntent().getExtras().getString("notaMinima");
 
-        tvnota = (TextView) findViewById(R.id.tvNotaCadastro);
-        tvnota.setTypeface(font);
-
-        etmateria = (EditText) findViewById(R.id.etMateria);
-        etnota = (EditText) findViewById(R.id.etNotaCadastro);;
-        etnota.setTypeface(font2);
-
-        String materiaDoPrecisa = "";
-        if(getIntent().getExtras().getString("materia") != null)
-            materiaDoPrecisa = getIntent().getExtras().getString("materia");
-
-        String notaDoPrecisa = getIntent().getExtras().getString("notaMinima");
-
-        etmateria.setText(materiaDoPrecisa);
-        etmateria.setFocusable(true);
-        etnota.setText(notaDoPrecisa);
-
-        meudb = new DBHelper(this);
+        etMatter.setFocusable(true);
+        etNewGrade.setText(requiredGrade);
+        etNewGrade.setTextColor(getIntent().getIntExtra("matterColor", R.color.AzulMedio));
 
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
-            int Value = extras.getInt("id");
-            if (Value > 0) {
-                Cursor rs = meudb.getData(Value);
-                id_To_Update = Value;
+            int id = extras.getInt("id");
+            if (id > 0) {
+                Cursor rs = dbHelper.getGrade(id);
+                idToUpdate = id;
                 rs.moveToFirst();
-                String nam = rs.getString(rs.getColumnIndex(DBHelper.NOTAS_COLUMN_MATERIA)); //TODO Resolver erro excluir nota
+                String nam = rs.getString(rs.getColumnIndex(DBHelper.NOTAS_COLUMN_MATERIA));
                 String emai = rs.getString(rs.getColumnIndex(DBHelper.NOTAS_COLUMN_NOTA));
-                if (!rs.isClosed())
+                if (!rs.isClosed()){
                     rs.close();
+                }
 
-                etmateria.setText(nam);
-                etnota.setText(emai);
+                etMatter.setText(nam);
+                etNewGrade.setText(emai);
             }
         }
-
         //mascara
-        MaskedInput maskedInput = new MaskedInput(this,"#.#",etnota);
-        etnota.addTextChangedListener(maskedInput.insert());
+        MaskedInput maskedInput = new MaskedInput(this, "#.#", etNewGrade);
+        etNewGrade.addTextChangedListener(maskedInput.insert());
     }
 
+    @OnClick(R.id.bt_persist_grade)
+    public void persistGrade(View view) {
+        String snomeMateria = etMatter.getText().toString();
 
-    public void salvaNota(View view) {
-        String snomeMateria = etmateria.getText().toString();
+        double inota = Double.parseDouble(etNewGrade.getText().toString());
 
-        EditText nota = (EditText) findViewById(R.id.etNotaCadastro);
-        double inota = Double.parseDouble(nota.getText().toString());
-
-        //Toast.makeText(getApplicationContext(),inota+"",Toast.LENGTH_SHORT).show();
-
-        if (snomeMateria.equals("") || inota < 0.0 || inota > 10.0  ) {
-            Toast.makeText(getApplicationContext(),"Informe o nome da matéria ou corrija a nota", Toast.LENGTH_SHORT).show();
-        }else{
+        if (snomeMateria.equals("") || inota < 0.0 || inota > 10.0) {
+            MediaDialog.showSnack(view,R.string.invalid_new_grade, Snackbar.LENGTH_LONG);
+        } else {
             Bundle extras = getIntent().getExtras();
             if (extras != null) {
                 int Value = extras.getInt("id");
                 if (Value > 0) {
-                    if (meudb.atualizarNota(id_To_Update, snomeMateria, inota+""))
-                        Toast.makeText(getApplicationContext(), "Atualizado",Toast.LENGTH_SHORT).show();
-
-                    else
-                        Toast.makeText(getApplicationContext(),"Não Atualizado", Toast.LENGTH_SHORT).show();
-
-                    finish();
-
+                    if (dbHelper.atualizarNota(idToUpdate, snomeMateria, inota + "")) {
+                        Toast.makeText(getApplicationContext(), getString(R.string.updated),Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(getApplicationContext(), getString(R.string.not_updated),Toast.LENGTH_SHORT).show();
+                    }
                 } else {
-                    if (meudb.inserirNota(snomeMateria, inota + ""))
-                        Toast.makeText(getApplicationContext(), "Grade Salva",Toast.LENGTH_SHORT).show();
-                    else
-                        Toast.makeText(getApplicationContext(), "Grade não Salva",Toast.LENGTH_SHORT).show();
-
-                    finish();
+                    if (dbHelper.inserirNota(snomeMateria, inota + "")) {
+                        Toast.makeText(getApplicationContext(), getString(R.string.saved_grade),Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(getApplicationContext(), getString(R.string.unsaved_grade),Toast.LENGTH_SHORT).show();
+                    }
                 }
+                finish();
             }
         }
     }

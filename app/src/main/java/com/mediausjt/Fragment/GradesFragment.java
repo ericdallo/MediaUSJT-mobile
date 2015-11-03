@@ -2,97 +2,97 @@ package com.mediausjt.Fragment;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
-import android.app.Fragment;
-import android.content.Context;
-import android.content.DialogInterface;
-import android.graphics.Typeface;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ExpandableListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.mediausjt.Adapter.CustomExpandAdapter;
 import com.mediausjt.Database.DBHelper;
-import com.mediausjt.Application.MainActivity;
 import com.mediausjt.Grade.Grade;
 import com.mediausjt.R;
+import com.mediausjt.Util.MediaConfig;
+import com.mediausjt.util.MediaDialog;
 
-import java.util.ArrayList;
+import java.util.List;
+
+import butterknife.Bind;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 @SuppressLint("ValidFragment")
 public class GradesFragment extends Fragment {
 
     public final static String NOME_ITEM = "Notas";
+    private DBHelper meudb;
+    private SparseArray<Grade> notas = new SparseArray<>();
 
-    DBHelper meudb;
-    SparseArray<Grade> notas = new SparseArray<Grade>();
-    private MainActivity mainActivity;
+    private List<Grade> gradeList;
+    private CustomExpandAdapter expandAdapter;
 
-    @SuppressLint("ValidFragment")
-    public GradesFragment(MainActivity mainActivity) {
-        this.mainActivity = mainActivity;
-    }
-    public GradesFragment(){
-        this.mainActivity = null;
-    }
+    @Bind(R.id.tv_grade_title)
+    TextView tvGradeTitle;
+    @Bind(R.id.list_view)
+    ExpandableListView listview;
+
+    @Bind(R.id.bt_drop_all)
+    FloatingActionButton btDropAll;
+    private View rootView;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        rootView = inflater.inflate(R.layout.grades_frag, container, false);
+        ButterKnife.bind(this, rootView);
 
-        View view = inflater.inflate(R.layout.frag2, container, false);
+        meudb = new DBHelper(rootView.getContext());
 
-        Typeface font = Typeface.createFromAsset(getActivity().getAssets(), "fonts/aller.ttf");
+        gradeList = meudb.getAllNotas();
+        convertToSparseArray(gradeList);
 
-        TextView tvTitulo = (TextView)view.findViewById(R.id.tvTituloNota);
-        tvTitulo.setTypeface(font);
-
-        final Context c = getActivity().getApplicationContext();
-
-        meudb = new DBHelper(c);
-        final ArrayList<Grade> array_list = meudb.getAllNotas();
-        transformaSparseArray(array_list);
-
-        final CustomExpandAdapter expandAdapter = new CustomExpandAdapter(getActivity(),notas, mainActivity);
-
-        Button b = (Button) view.findViewById(R.id.btDeletarTudo);
-
-        b.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View arg0) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                builder.setMessage(R.string.deletarTodasNotas).setPositiveButton(R.string.sim,new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog,int id) {
-                        array_list.clear();
-                        expandAdapter.notifyDataSetChanged();
-                        meudb.deletarTodasNotas();
-                        Toast.makeText(getActivity(), "Notas excluidas",Toast.LENGTH_LONG).show();
-                        getActivity().recreate(); //TODO arrumar para voltar para o menu principal ou atualizar notas
-                    }
-                }).setNegativeButton(R.string.nao, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        Toast.makeText(getActivity(), "Nenhuma nota excluida", Toast.LENGTH_LONG).show();
-                    }
-                });
-                AlertDialog d = builder.create();
-                d.setTitle("Excluir Todas as Notas ?");
-                d.show();
-            }
-        });
-
-        //ListView listview = (ListView) view.findViewById(R.id.listView1);
-        ExpandableListView listview = (ExpandableListView) view.findViewById(R.id.listView);
+        expandAdapter = new CustomExpandAdapter(notas);
         listview.setAdapter(expandAdapter);
 
-        return view;
+        MediaConfig.addFirstFontTo(tvGradeTitle);
+
+        if (gradeList.isEmpty()){
+            btDropAll.hide();
+        }
+
+        return rootView;
     }
 
-    public void transformaSparseArray(ArrayList<Grade> array_list) {
-        for(int i = 0; i< array_list.size();i++){
-           Grade grade = new Grade(array_list.get(i).getId(),array_list.get(i).getMateria(),array_list.get(i).getNota());
+    @OnClick(R.id.bt_drop_all)
+    public void dropAllGrades(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setMessage(R.string.deletarTodasNotas).setPositiveButton(R.string.sim, (dialog, id) -> {
+            gradeList.clear();
+            expandAdapter.notifyDataSetChanged();
+
+            meudb.dropAllGrades();
+
+            MediaConfig.getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, new AverageFragment()).commit();
+
+            MediaDialog.showSnack(rootView.getRootView(), R.string.grades_removed_message, Snackbar.LENGTH_LONG);
+        }).setNegativeButton(R.string.nao, (dialog1, which) -> {
+        });
+
+        AlertDialog dialog = builder.create();
+        dialog.setTitle("Excluir Todas as Notas ?");
+        dialog.show();
+    }
+
+    public void convertToSparseArray(List<Grade> gradeList) {
+        for (int i = 0; i < gradeList.size(); i++) {
+            Grade grade = new Grade();
+            grade.setId(gradeList.get(i).getId());
+            grade.setMatter(gradeList.get(i).getMatter());
+            grade.setValue(gradeList.get(i).getValue());
+
             notas.append(i, grade);
         }
     }

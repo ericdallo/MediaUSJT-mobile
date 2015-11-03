@@ -7,14 +7,13 @@
     <color name="AzulFraco">#FF2532AE</color>
     <color name="Branco">#FFFFFFFF</color>
     <color name="CinzaClaro">#ffd9d9d9</color>
-    <color name="Verde">#ff13a800</color>
-    <color name="Vermelho">#FFFF0000</color>
-    <color name="Preto">#FF000000</color>
+    <color name="green">#ff13a800</color>
+    <color name="red">#FFFF0000</color>
+    <color name="black">#FF000000</color>
     <color name="azul_pressed">@color/AzulForte</color>
     <color name="azul_normal">@color/AzulMedio</color>
-
-
-
+    <color name="dark_red">#ba0000</color>
+    <color name="white">#FFFFFF</color>
 </resources>
 
 

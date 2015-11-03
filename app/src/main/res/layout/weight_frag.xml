@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFFFF"
+    android:id="@+id/lt_coordinator"
     android:orientation="vertical"
-    tools:context="com.mediausjt.FullscreenActivity" >
+    tools:context="com.mediausjt.FullscreenActivity">
 
     <ImageView
-        android:id="@+id/imageView1"
+        android:id="@+id/background_image"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="20dp"
@@ -19,7 +21,7 @@
     <RelativeLayout
         android:id="@+id/layRelativeMain3"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+        android:layout_height="match_parent">
 
         <TextView
             android:id="@+id/tvTituloPeso"
@@ -33,7 +35,7 @@
             android:typeface="normal" />
 
         <TextView
-            android:id="@+id/tvPeso1"
+            android:id="@+id/tv_change_first_grade"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/tvTituloPeso"
@@ -42,24 +44,24 @@
             android:keepScreenOn="false"
             android:text="@string/tvPeso1"
             android:textColor="@color/AzulMedio"
-            android:textSize="20sp"/>
+            android:textSize="20sp" />
 
         <SeekBar
-            android:id="@+id/seekbar1"
+            android:id="@+id/seekbar_first_grade"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/tvPeso1"
-            android:transitionGroup="true"
-            android:drawSelectorOnTop="true"
+            android:layout_below="@+id/tv_change_first_grade"
             android:layout_marginTop="15dp"
+            android:drawSelectorOnTop="true"
             android:gravity="center_horizontal"
-            android:prompt="@string/promptPeso" />
+            android:prompt="@string/promptPeso"
+            android:transitionGroup="true" />
 
         <TextView
-            android:id="@+id/tvPeso2"
+            android:id="@+id/tv_change_second_grade"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/seekbar1"
+            android:layout_below="@id/seekbar_first_grade"
             android:layout_marginTop="20dp"
             android:gravity="center"
             android:keepScreenOn="false"
@@ -69,72 +71,62 @@
             android:typeface="serif" />
 
         <SeekBar
-            android:id="@+id/seekbar2"
+            android:id="@+id/seekbar_second_grade"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:drawSelectorOnTop="true"
-            android:layout_below="@+id/tvPeso2"
+            android:layout_below="@+id/tv_change_second_grade"
             android:layout_marginTop="15dp"
+            android:drawSelectorOnTop="true"
             android:prompt="@string/promptPeso" />
 
         <TextView
             android:id="@+id/tvTituloMedia"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Média"
-            android:layout_below="@+id/seekbar2"
+            android:layout_below="@+id/seekbar_second_grade"
             android:layout_marginTop="20dp"
             android:gravity="center"
             android:keepScreenOn="false"
+            android:text="Média"
             android:textColor="@color/AzulMedio"
             android:textSize="30sp"
             android:textStyle="bold"
-            android:typeface="normal"
-            />
+            android:typeface="normal" />
+
         <TextView
+            android:id="@+id/tv_change_average"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="6"
-            android:id="@+id/tvMedia"
             android:layout_below="@+id/tvTituloMedia"
             android:layout_marginTop="20dp"
             android:gravity="center"
             android:keepScreenOn="false"
+            android:text="6"
             android:textColor="@color/AzulMedio"
-            android:textSize="30sp"/>
+            android:textSize="30sp" />
+
         <SeekBar
-            android:id="@+id/seekbar3"
+            android:id="@+id/seekbar_average"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:drawSelectorOnTop="true"
-            android:layout_below="@+id/tvMedia"
+            android:layout_below="@+id/tv_change_average"
             android:layout_marginTop="15dp"
+            android:drawSelectorOnTop="true"
             android:prompt="@string/promptPeso" />
     </RelativeLayout>
 
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fitsSystemWindows="true" >
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/bt_reset_weight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/fab_button_margin_bottom"
+        android:src="@drawable/fab_reset"
+        app:borderWidth="0dp"
+        app:elevation="6dp"
+        app:layout_anchor="@id/lt_coordinator"
+        app:layout_anchorGravity="bottom|center"
+        app:pressedTranslationZ="12dp" />
 
-        <LinearLayout
-            android:id="@+id/fullscreen_content_controls"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|clip_horizontal"
-            android:orientation="horizontal"
-            tools:ignore="UselessParent" >
-
-            <Button
-                android:id="@+id/btMudarPeso"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@drawable/flat_botao"
-                android:text="@string/mudarPeso"
-                android:textColor="@color/Branco"
-                android:textSize="25sp" />
-        </LinearLayout>
-    </FrameLayout>
-
-</FrameLayout>
+</android.support.design.widget.CoordinatorLayout>

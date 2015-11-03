@@ -1,15 +1,14 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/lt_coordinator"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF"
-    android:orientation="vertical"
-    xmlns:tools="http://schemas.android.com/tools">
+    android:background="#FFFFFF">
 
     <ImageView
-        android:id="@+id/imageView1"
+        android:id="@+id/background_image"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="20dp"
         android:alpha=".50"
         android:contentDescription="@string/descrUSJT"
         android:src="@drawable/usjtflat" />
@@ -17,85 +16,79 @@
     <RelativeLayout
         android:id="@+id/layRelative"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+        android:layout_height="match_parent">
 
         <TextView
             android:id="@+id/tvTitulo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
             android:gravity="center"
-            android:layout_marginTop="10dp"
             android:keepScreenOn="false"
             android:text="@string/tvTitulo"
             android:textColor="@color/AzulMedio"
-            android:textSize="30sp"
-            android:textStyle="bold"
-            android:typeface="normal" />
-
-
+            android:textSize="24sp"
+            android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/tvNota1"
+            android:id="@+id/tv_first_grade"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/tvTitulo"
+            android:layout_marginTop="15dp"
             android:gravity="center"
-            android:layout_marginTop="40dp"
             android:keepScreenOn="false"
             android:text="@string/tvNota1"
             android:textColor="@color/AzulMedio"
-            android:textSize="20sp"
-            android:typeface="serif" />
+            android:textSize="18sp" />
 
         <EditText
-            android:id="@+id/etNota1"
+            android:id="@+id/et_first_grade"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/tvNota1"
-            android:gravity="center_horizontal"
-            android:layout_marginTop="15dp"
+            android:layout_below="@id/tv_first_grade"
             android:ems="4"
+            android:gravity="center_horizontal"
             android:inputType="numberDecimal"
             android:textColor="#000000"
-            android:textSize="55sp" />
+            android:textSize="45sp" />
 
         <TextView
-            android:id="@+id/tvNota2"
+            android:id="@+id/tv_second_grade"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/etNota1"
+            android:layout_below="@id/et_first_grade"
+            android:layout_marginTop="10dp"
             android:gravity="center"
-            android:layout_marginTop="20dp"
             android:keepScreenOn="false"
             android:text="@string/tvNota2"
             android:textColor="@color/AzulMedio"
-            android:textSize="20sp"
-            android:typeface="serif" />
+            android:textSize="18sp" />
 
         <EditText
-            android:id="@+id/etNota2"
+            android:id="@+id/et_second_grade"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/tvNota2"
+            android:layout_below="@id/tv_second_grade"
+            android:ems="4"
             android:gravity="center_horizontal"
-            android:layout_marginTop="15dp"
             android:inputType="numberDecimal"
             android:textColor="#000000"
-            android:ems="4"
-            android:textSize="55sp" />
+            android:textSize="45sp" />
+
         <LinearLayout
             android:id="@+id/layRelative2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/etNota2"
-            android:orientation="horizontal"
-            >
+            android:layout_below="@+id/et_second_grade"
+            android:orientation="horizontal">
 
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:orientation="vertical">
+
                 <TextView
                     android:id="@+id/tvResp"
                     android:layout_width="match_parent"
@@ -103,25 +96,27 @@
                     android:gravity="center_horizontal"
                     android:text="@string/tvResp"
                     android:textColor="@color/AzulMedio"
-                    android:textSize="20sp"
+                    android:textSize="18sp"
                     android:textStyle="bold" />
 
                 <EditText
-                    android:id="@+id/etResp1"
-                    android:gravity="center_horizontal"
+                    android:id="@+id/et_average_result"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="3"
                     android:enabled="false"
+                    android:gravity="center_horizontal"
                     android:inputType="numberDecimal"
                     android:maxLength="4"
-                    android:textSize="55sp" />
+                    android:textSize="45sp" />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:orientation="vertical">
+
                 <TextView
                     android:id="@+id/tvPrecisa1"
                     android:layout_width="match_parent"
@@ -129,49 +124,36 @@
                     android:gravity="center_horizontal"
                     android:text="@string/tvPrecisa1"
                     android:textColor="@color/AzulMedio"
-                    android:textSize="20sp"
+                    android:textSize="18sp"
                     android:textStyle="bold" />
 
                 <EditText
-                    android:id="@+id/etPrecisa1"
+                    android:id="@+id/et_required"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="3"
-                    android:gravity="center_horizontal"
                     android:enabled="false"
+                    android:gravity="center_horizontal"
                     android:inputType="numberDecimal"
                     android:maxLength="4"
-                    android:textSize="55sp"/>
+                    android:textSize="45sp" />
             </LinearLayout>
         </LinearLayout>
+
     </RelativeLayout>
 
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fitsSystemWindows="true" >
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/bt_save"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/fab_button_margin_bottom"
+        android:src="@drawable/fab_save"
+        app:borderWidth="0dp"
+        app:elevation="6dp"
+        app:layout_anchor="@id/lt_coordinator"
+        app:layout_anchorGravity="bottom|center"
+        app:pressedTranslationZ="12dp" />
 
-            <LinearLayout
-                android:id="@+id/fullscreen_content_controls"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom|clip_horizontal"
-                android:orientation="horizontal"
-                tools:ignore="UselessParent"
-                 >
-
-                <Button
-                    android:id="@+id/btSalvar"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="@drawable/flat_botao"
-                    android:text="@string/salvar"
-                    android:textColor="#FFFFFF"
-                    android:textSize="20sp"/>
-
-            </LinearLayout>
-        </FrameLayout>
-
-
-</FrameLayout>
+</android.support.design.widget.CoordinatorLayout>

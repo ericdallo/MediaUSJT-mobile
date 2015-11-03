@@ -2,19 +2,19 @@ package com.mediausjt.Item;
 
 public class NavegationDrawerItem {
 
-    String itemNome;
-    int imgID;
+    private String name;
+    private int id;
 
-    public NavegationDrawerItem(String nome, int ID) {
-        itemNome = nome;
-        this.imgID = ID;
+    public NavegationDrawerItem(String name, int id) {
+        this.name = name;
+        this.id = id;
     }
 
-    public String getItemNome() {
-        return itemNome;
+    public String getName() {
+        return name;
     }
-    public int getImgID() {
-        return imgID;
+    public int getId() {
+        return id;
     }
 
 }

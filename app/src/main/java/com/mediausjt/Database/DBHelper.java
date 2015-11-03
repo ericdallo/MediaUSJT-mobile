@@ -9,6 +9,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import com.mediausjt.Grade.Grade;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class DBHelper extends SQLiteOpenHelper {
 
@@ -44,7 +45,7 @@ public class DBHelper extends SQLiteOpenHelper {
         return true;
     }
 
-    public Cursor getData(int id) {
+    public Cursor getGrade(int id) {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor res = db.rawQuery("select * from notas where id=" + id + "",null);
 
@@ -66,22 +67,25 @@ public class DBHelper extends SQLiteOpenHelper {
         return db.delete("notas", "id = ? ", new String[] { Integer.toString(id) }); //TODO Arrumar o mais 1
     }
 
-    public void deletarTodasNotas() {
+    public void dropAllGrades() {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(NOTAS_TABLE_NAME,null,null);
     }
 
-    public ArrayList<Grade> getAllNotas(){
-        ArrayList<Grade> array_list = new ArrayList<Grade>();
+    public List<Grade> getAllNotas(){
+        List<Grade> gradeList = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor res = db.rawQuery("select * from notas",null);
         res.moveToFirst();
         Grade grade;
         while(!res.isAfterLast()){
-            grade = new Grade(res.getInt(res.getColumnIndex(NOTAS_COLUMN_ID)),res.getString(res.getColumnIndex(NOTAS_COLUMN_MATERIA)),res.getString(res.getColumnIndex(NOTAS_COLUMN_NOTA)));
-            array_list.add(grade);
+            grade = new Grade();
+            grade.setId(res.getInt(res.getColumnIndex(NOTAS_COLUMN_ID)) );
+            grade.setMatter(res.getString(res.getColumnIndex(NOTAS_COLUMN_MATERIA)));
+            grade.setValue(res.getString(res.getColumnIndex(NOTAS_COLUMN_NOTA)));
+            gradeList.add(grade);
             res.moveToNext();
         }
-        return array_list;
+        return gradeList;
     }
 }

@@ -1,172 +1,89 @@
 package com.mediausjt.Fragment;
 
-import android.annotation.SuppressLint;
-import android.app.Fragment;
-import android.content.SharedPreferences;
-import android.graphics.Typeface;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
+import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
-import com.mediausjt.Application.MainActivity;
 import com.mediausjt.R;
+import com.mediausjt.Util.MediaConfig;
+import com.mediausjt.listener.SeekBarListener;
+import com.mediausjt.util.MediaDialog;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 
-public class WeightFragment extends Fragment implements SeekBar.OnSeekBarChangeListener{
+public class WeightFragment extends Fragment {
+
+    @Bind(R.id.seekbar_first_grade)
+    SeekBar seekbarFirstGrade;
+
+    @Bind(R.id.seekbar_second_grade)
+    SeekBar seekbarSecondGrade;
+    @Bind(R.id.seekbar_average)
+    SeekBar seekbarAverage;
+    @Bind(R.id.tv_change_first_grade)
+    TextView tvFirstGrade;
+
+    @Bind(R.id.tv_change_second_grade)
+    TextView tvSecondGrade;
+    @Bind(R.id.tv_change_average)
+    TextView tvAverage;
 
     public static final String NOME_ITEM = "Peso";
-    private final MainActivity mainActivity;
-    private SeekBar seek1,seek2,seek3;
-    private TextView tvseek1,tvseek2,tvseek3;
-    private double peso1,peso2;
-    private int media;
-    private boolean podesalvar = false;
-    private SharedPreferences prefs;
-    private Typeface font,font2;
-
-
-    public WeightFragment(){
-        this.mainActivity = null;
-    }
-
-    @SuppressLint("ValidFragment")
-    public WeightFragment(MainActivity mainActivity) {
-        this.mainActivity = mainActivity;
-    }
+    private SeekBarListener seekBarListener;
+    private View rootView;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        final View view = inflater.inflate(R.layout.frag3, container, false);
+        rootView = inflater.inflate(R.layout.weight_frag, container, false);
+        ButterKnife.bind(this, rootView);
 
-        prefs = getMainActivity().getPrefs();
+        float firstGradeWeight = MediaConfig.getPreference("peso1", 0.4f);
+        float secondGradeWeight = MediaConfig.getPreference("peso2", 0.6f);
+        int averageWeight = MediaConfig.getPreference("media", 6);
 
-        font = Typeface.createFromAsset(getActivity().getAssets(), "fonts/aller.ttf");
-        font2 = Typeface.createFromAsset(getActivity().getAssets(), "fonts/aller.ttf");
+        seekBarListener = new SeekBarListener.Builder()
+                .withFirstWeight(firstGradeWeight)
+                .withSecondWeight(secondGradeWeight)
+                .withAverageWeight(averageWeight)
+                .withTextViewFirst(tvFirstGrade)
+                .withTextViewSecond(tvSecondGrade)
+                .withTextViewAverage(tvAverage)
+                .withSeekBarFirstGrade(seekbarFirstGrade)
+                .withSeekBarSecondGrade(seekbarSecondGrade)
+                .withSeekBarAverageGrade(seekbarAverage)
+                .build();
 
+        setupSeekbar(seekbarFirstGrade, firstGradeWeight, false);
+        setupSeekbar(seekbarSecondGrade, secondGradeWeight, false);
+        setupSeekbar(seekbarAverage, averageWeight, true);
 
-        peso1 = (double) prefs.getFloat("peso1", (float) 0.4);
-        peso2 = (double) prefs.getFloat("peso2", (float) 0.6);
-        media = prefs.getInt("media", 6);
+        tvFirstGrade.setText("1º Semestre: 0." + seekbarFirstGrade.getProgress() / 10);
+        tvSecondGrade.setText("2º Semestre: 0." + seekbarSecondGrade.getProgress() / 10);
+        tvAverage.setText("" + seekbarAverage.getProgress() / 10);
 
-        seek1 = (SeekBar) view.findViewById(R.id.seekbar1);
-        seek1.setMax(90);
-        seek1.setProgress((int) (peso1 * 100));
-        seek1.setOnSeekBarChangeListener(this);
-
-        seek2 = (SeekBar) view.findViewById(R.id.seekbar2);
-        seek2.setMax(90);
-        seek2.setProgress((int) (peso2 * 100));
-        seek2.setOnSeekBarChangeListener(this);
-
-        seek3 = (SeekBar) view.findViewById(R.id.seekbar3);
-        seek3.setMax(90);
-        seek3.setProgress(media * 10);
-        seek3.setOnSeekBarChangeListener(this);
-
-        tvseek1 = (TextView) view.findViewById(R.id.tvPeso1);
-        tvseek1.setText("1º Semestre: 0." + seek1.getProgress() / 10);
-
-        tvseek2 = (TextView) view.findViewById(R.id.tvPeso2);
-        tvseek2.setText("2º Semestre: 0." + seek2.getProgress() / 10);
-
-        tvseek3 = (TextView) view.findViewById(R.id.tvMedia);
-        tvseek3.setText("" + seek3.getProgress() / 10);
-
-        Button btmudar = (Button) view.findViewById(R.id.btMudarPeso);
-        btmudar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                peso1 = 0.4;
-                peso2 = 0.6;
-                media = 6;
-                seek1.setProgress(40);
-                seek2.setProgress(60);
-                seek3.setProgress(60);
-                salvaPeso();
-            }
-        });
-        return view;
+        return rootView;
     }
 
-    @Override
-    public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-        int stepSize = 10;
-        progress = (Math.round(progress/stepSize))*stepSize;
-        seekBar.setProgress(progress);
-        if(progress <= 10)
-            seekBar.setProgress(10);
+    @OnClick(R.id.bt_reset_weight)
+    public void resetWeight() {
+        MediaDialog.showSnack(rootView, R.string.reset_message, Snackbar.LENGTH_LONG);
+        seekbarFirstGrade.setProgress(40);
+        seekbarSecondGrade.setProgress(60);
+        seekbarAverage.setProgress(60);
 
-        if(seekBar == seek1){
-            String speso = "0."+(seek1.getProgress()/10);
-
-            if(Double.parseDouble(speso) >= 0.1){
-                peso1 = Double.parseDouble(speso);
-                tvseek1.setText("1º Semestre: " + peso1);
-                mainActivity.setPeso1Setado("" + peso1);
-
-                String speso2 = "0."+((100-seek1.getProgress())/10);
-                peso2 = Double.parseDouble(speso2);
-                tvseek2.setText("2º Semestre: " + peso2);
-                seek2.setProgress(100-seek1.getProgress());
-                podesalvar = true;
-            }else
-                podesalvar = false;
-
-
-        }else if(seekBar == seek2){
-            String speso2 = "0."+(seek2.getProgress()/10);
-
-            if(Double.parseDouble(speso2) >= 0.1){
-                peso2 = Double.parseDouble(speso2);
-                tvseek2.setText("2º Semestre: " + peso2);
-                mainActivity.setPeso2Setado("" + peso2);
-
-                String speso = "0."+((100-seek2.getProgress())/10);
-                peso1 = Double.parseDouble(speso);
-                tvseek1.setText("1º Semestre: " + peso1);
-                seek1.setProgress(100-seek2.getProgress());
-                podesalvar = true;
-            }else
-                podesalvar = false;
-        }else{
-
-            if(seek3.getProgress()/10 >= 1){
-                media = seek3.getProgress()/10;
-                tvseek3.setText(""+media);
-                podesalvar = true;
-            }else
-                podesalvar = false;
-
-        }
+        MediaConfig.resetWeight();
     }
 
-    private void salvaPeso() {
-        final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this.getActivity());
-
-        SharedPreferences.Editor editor = prefs.edit();
-        editor.putFloat("peso1", (float) peso1);
-        editor.putFloat("peso2", (float)peso2);
-        editor.putInt("media", media);
-        editor.apply();
-    }
-
-    @Override
-    public void onStartTrackingTouch(SeekBar seekBar) {
-
-    }
-
-    @Override
-    public void onStopTrackingTouch(SeekBar seekBar) {
-        seekBar.setSecondaryProgress(seekBar.getProgress());
-        if(podesalvar)
-            salvaPeso();
-    }
-
-    public MainActivity getMainActivity() {
-        return mainActivity;
+    private void setupSeekbar(SeekBar seekbar, double value, boolean type) {
+        seekbar.setMax(90);
+        double multiplier = type ? 10 : 100;
+        seekbar.setProgress((int) (value * multiplier));
+        seekbar.setOnSeekBarChangeListener(seekBarListener);
     }
 }
