@@ -13,7 +13,7 @@ import android.view.ViewGroup;
 import android.widget.ExpandableListView;
 import android.widget.TextView;
 
-import com.mediausjt.Adapter.CustomExpandAdapter;
+import com.mediausjt.Adapter.GradeExpandAdapter;
 import com.mediausjt.Database.DBHelper;
 import com.mediausjt.Grade.Grade;
 import com.mediausjt.R;
@@ -34,7 +34,7 @@ public class GradesFragment extends Fragment {
     private SparseArray<Grade> notas = new SparseArray<>();
 
     private List<Grade> gradeList;
-    private CustomExpandAdapter expandAdapter;
+    private GradeExpandAdapter expandAdapter;
 
     @Bind(R.id.tv_grade_title)
     TextView tvGradeTitle;
@@ -54,7 +54,7 @@ public class GradesFragment extends Fragment {
         gradeList = meudb.getAllNotas();
         convertToSparseArray(gradeList);
 
-        expandAdapter = new CustomExpandAdapter(notas);
+        expandAdapter = new GradeExpandAdapter(notas);
         listview.setAdapter(expandAdapter);
 
         MediaConfig.addFirstFontTo(tvGradeTitle);

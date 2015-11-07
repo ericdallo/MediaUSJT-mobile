@@ -1,0 +1,75 @@
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/lt_coordinator"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <RelativeLayout
+        android:id="@+id/lt_relative"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/tv_new_grade_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:padding="10dp"
+            android:text="@string/new_grade_title"
+            android:textSize="27sp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:id="@+id/lt_matter_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_new_grade_title"
+            android:orientation="vertical"
+            android:padding="15dp">
+
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/et_matter"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:hint="@string/matterName"
+                android:textSize="25dp"
+                app:met_floatingLabel="normal"
+                app:met_primaryColor="@color/Azul" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/lt_matter_name"
+            android:orientation="vertical"
+            android:padding="15dp">
+
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/et_new_grade"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:hint="@string/required_grade"
+                android:textSize="25dp"
+                app:met_floatingLabel="normal"
+                app:met_primaryColor="@color/Azul" />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/bt_persist_grade"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/fab_button_margin_bottom"
+        android:src="@drawable/fab_check"
+        app:borderWidth="0dp"
+        app:elevation="6dp"
+        app:layout_anchor="@id/lt_relative"
+        app:layout_anchorGravity="bottom|center"
+        app:pressedTranslationZ="12dp" />
+
+</android.support.design.widget.CoordinatorLayout>

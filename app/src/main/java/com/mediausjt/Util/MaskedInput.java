@@ -7,29 +7,29 @@ import android.util.Log;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
-import com.mediausjt.Fragment.AverageFragment;
-import com.mediausjt.Grade.NewGradeActivity;
+import com.mediausjt.Fragment.LogicFragment;
+import com.mediausjt.Fragment.NewGradeFragment;
 
 public class MaskedInput {
 
-    private AverageFragment averageFragment;
-    private NewGradeActivity newGradeActivity;
+    private LogicFragment averageFragment;
+    private NewGradeFragment newGradeActivity;
     private String mask, actualString;
     private EditText editText;
     private boolean isPressed;
 
-    public MaskedInput(AverageFragment averageFragment, String mask, EditText editText) {
+    public MaskedInput(LogicFragment averageFragment, String mask, EditText editText) {
         this.averageFragment = averageFragment;
         this.mask = mask;
         this.editText = editText;
         this.newGradeActivity = null;
     }
 
-    public MaskedInput(NewGradeActivity newGradeActivity, String mask, EditText editText) {
+    public MaskedInput(NewGradeFragment newGradeFragment, String mask, EditText editText) {
         this.averageFragment = null;
         this.mask = mask;
         this.editText = editText;
-        this.newGradeActivity = newGradeActivity;
+        this.newGradeActivity = newGradeFragment;
     }
 
     public static String unmask(String s) {
@@ -113,13 +113,8 @@ public class MaskedInput {
     }
 
     private void downKeyboard() {
-        if (averageFragment != null) {
-            final InputMethodManager inputMethodManager = (InputMethodManager) averageFragment.getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-            inputMethodManager.hideSoftInputFromWindow(averageFragment.getView().getWindowToken(), 0);
-        } else {
-            final InputMethodManager inputMethodManager = (InputMethodManager) newGradeActivity.getSystemService(Context.INPUT_METHOD_SERVICE);
-            inputMethodManager.hideSoftInputFromWindow(newGradeActivity.getWindow().getDecorView().getWindowToken(), 0);
-        }
+        final InputMethodManager inputMethodManager = (InputMethodManager) MediaConfig.getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+        inputMethodManager.hideSoftInputFromWindow(MediaConfig.getActivity().getWindow().getDecorView().getWindowToken(), 0);
     }
 
     public void pressed(boolean pressed) {

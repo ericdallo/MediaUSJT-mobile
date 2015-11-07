@@ -2,8 +2,6 @@ package com.mediausjt.Adapter;
 
 import android.app.AlertDialog;
 import android.content.Context;
-import android.content.Intent;
-import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
@@ -16,17 +14,16 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.mediausjt.Database.DBHelper;
-import com.mediausjt.Fragment.AverageFragment;
 import com.mediausjt.Grade.Grade;
-import com.mediausjt.Grade.NewGradeActivity;
 import com.mediausjt.R;
 import com.mediausjt.Util.MediaConfig;
+import com.mediausjt.util.FragmentUtil;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class CustomExpandAdapter extends BaseExpandableListAdapter {
+public class GradeExpandAdapter extends BaseExpandableListAdapter {
 
     @Nullable @Bind(R.id.tv_matter_list_item)
     TextView tvMatterListItem;
@@ -40,7 +37,7 @@ public class CustomExpandAdapter extends BaseExpandableListAdapter {
 
     private final SparseArray<Grade> notas;
 
-    public CustomExpandAdapter(SparseArray<Grade> notas) {
+    public GradeExpandAdapter(SparseArray<Grade> notas) {
         this.notas = notas;
     }
 
@@ -138,13 +135,15 @@ public class CustomExpandAdapter extends BaseExpandableListAdapter {
 
     @OnClick(R.id.bt_edit_matter)
     public void editMatter(View view){
-        Intent intent = new Intent(MediaConfig.getActivity(),NewGradeActivity.class);
-        intent.putExtra("notaMinima", tvGradeListItem.getText().toString());
-        Bundle dataBundle = new Bundle();
-        dataBundle.putInt("id", notas.get((int) view.getTag()).getId());
-        intent.putExtras(dataBundle);
-        MediaConfig.getActivity().startActivity(intent);
-        MediaConfig.getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.content_frame,new AverageFragment()).commit();
+
+        Grade grade = notas.get((int) view.getTag());
+
+        MediaConfig.savePreference("notaMinima", tvGradeListItem.getText().toString());
+        MediaConfig.savePreference("gradeColor", tvGradeListItem.getCurrentTextColor());
+        MediaConfig.savePreference("idToUpdate", String.valueOf(grade.getId()) );
+
+        FragmentUtil.isEditGrade = true;
+        MediaConfig.goToNewGrade();
     }
 
     @OnClick(R.id.bt_delete_matter)

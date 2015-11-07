@@ -24,6 +24,7 @@ import com.mediausjt.Fragment.WeightFragment;
 import com.mediausjt.Item.NavegationDrawerItem;
 import com.mediausjt.R;
 import com.mediausjt.Util.MediaConfig;
+import com.mediausjt.util.FragmentUtil;
 import com.mediausjt.util.MediaDialog;
 
 import java.util.ArrayList;
@@ -184,5 +185,18 @@ public class MediaActivity extends AppCompatActivity {
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
         drawerToggle.onConfigurationChanged(newConfig);
+    }
+
+    @Override
+    public void onBackPressed() {
+        if(FragmentUtil.isEditGrade){
+            MediaConfig.goToAverage();
+            FragmentUtil.isEditGrade = false;
+            return;
+        }
+        if(FragmentUtil.isLogic){
+            super.onBackPressed();
+        }
+        FragmentUtil.showLogic();
     }
 }
