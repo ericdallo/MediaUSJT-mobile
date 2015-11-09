@@ -3,7 +3,7 @@ package com.mediausjt.listener;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
-import com.mediausjt.Util.MediaConfig;
+import com.mediausjt.util.MediaConfig;
 
 public class SeekBarListener implements SeekBar.OnSeekBarChangeListener {
 

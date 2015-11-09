@@ -1,16 +1,19 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.mediausjt">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.mediausjt">
 
-    <application 
-	android:allowBackup="true" 
-	android:label="@string/app_name"
-        android:icon="@mipmap/usjticon" 
-	android:theme="@style/AppTheme">
-	<activity
-            android:name=".Application.MediaActivity"
-            android:label="@string/app_name"
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/usjticon"
+        android:label="@string/mediausjt_name"
+        android:theme="@style/AppTheme"
+        tools:node="replace">
+        <activity
+            android:name=".application.MediaActivity"
             android:configChanges="keyboardHidden|screenSize"
-            android:windowSoftInputMode="stateHidden"
-            android:screenOrientation="portrait">>
+            android:label="@string/mediausjt_name"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden">>
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -15,6 +15,14 @@ public class FragmentUtil {
     private static Fragment logicFragment;
     private static Fragment newGradeFragment;
 
+    public static void initAverage() {
+        FragmentTransaction ft = manager.beginTransaction();
+        ft.hide(newGradeFragment);
+        ft.show(logicFragment);
+        ft.commit();
+        isLogic = true;
+    }
+
     public static void showLogic() {
         hideFrag(newGradeFragment);
         showFrag(logicFragment);
@@ -60,5 +68,4 @@ public class FragmentUtil {
     public static View getRootView() {
         return logicFragment.getView();
     }
-
 }
