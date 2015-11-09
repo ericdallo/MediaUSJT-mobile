@@ -1,5 +1,4 @@
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/lt_coordinator"
     android:layout_width="match_parent"
@@ -17,14 +16,14 @@
 
     <fragment
         android:id="@+id/logic_frag"
-        android:name="com.mediausjt.Fragment.LogicFragment"
+        android:name="com.mediausjt.fragment.LogicFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:layout="@layout/logic_frag" />
 
     <fragment
         android:id="@+id/new_grade_frag"
-        android:name="com.mediausjt.Fragment.NewGradeFragment"
+        android:name="com.mediausjt.fragment.NewGradeFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:layout="@layout/new_grade_frag" />

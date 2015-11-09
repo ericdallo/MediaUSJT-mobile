@@ -2,8 +2,8 @@
     <string name="drawer_open">Abriu</string>
     <string name="drawer_close">fechou</string>
 
-    <string name="app_name">Média USJT</string>
-    <string name="matterName">Nome da Matéria</string>
+    <string name="mediausjt_name">Média USJT</string>
+    <string name="matterName">Matéria</string>
     <string name="required_grade">Nota Mínima</string>
     <string name="cadastramentoSalvar">Salvar Nota</string>
     <string name="descrUSJT">Logo Fundo</string>
@@ -21,7 +21,7 @@
     <string name="conteudo">Contato</string>
     <string name="editarMenu">Editar</string>
     <string name="deletarMenu">Excluir</string>
-    <string name="how_to_message">Bem-vindo ao Média USJT.\n\n•  Se deseja saber sua nota anual, informe-a nos dois campos.\n\n•  Se deseja saber qual nota precisa tirar no 2°semestre, informe somente a nota do 1°semestre.\n\n•  Para cadastrar uma nota,faça o cálculo da nota mínima, e em seguida pressione o botão \"Salvar\".\n\n•  Para ver a nota cadastrada,vá para a aba \"Notas Mínimas Cadastradas\".\nPara alteração da nota, escolha a nota e escolha a opção \"Excluir\" ou \"Editar\".\n\n•  Caso deseje alterar o peso ou média do cálculo, na aba \"Pesos\", selecione o valor dos pesos ou média.</string>
+    <string name="how_to_message">Bem-vindo ao Média USJT.\n\n•  Se deseja saber sua nota anual, informe-a nos dois campos.\n\n•  Se deseja saber qual nota precisa tirar no 2°semestre, informe somente a nota do 1°semestre.\n\n•  Para cadastrar uma nota,faça o cálculo da nota mínima, e em seguida pressione o botão \"Salvar\".\n\n•  Para ver a nota cadastrada,vá para a aba \"Notas Mínimas Cadastradas\".\nPara alteração da nota, escolha a nota, deslize o dedo para a esquerda e escolha a opção \"Excluir\" ou \"Editar\".\n\n•  Caso deseje alterar o peso ou média do cálculo, na aba \"Pesos\", selecione o valor dos pesos ou média.</string>
     <string name="contact_message">Tem novas idéias?\n\nAlgum problema com o aplicativo?\n\nE-mail: mediausjt@gmail.com\n</string>
     <string name="deletarTodasNotas">Você tem certeza que deseja excluir todas as notas ?</string>
     <string name="delete_grade">Você tem certeza que deseja excluir essa nota ?</string>
@@ -49,4 +49,6 @@
     <string name="not_updated">Não Atualizado</string>
     <string name="grades_removed_message">Todas as notas excluidas</string>
     <string name="new_grade_title">Salvar Nota</string>
+    <string name="no_grades">Nenhuma nota salva</string>
+    <string name="removed_grade">Nota Excluida</string>
 </resources>

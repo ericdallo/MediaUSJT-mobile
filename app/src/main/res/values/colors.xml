@@ -14,6 +14,7 @@
     <color name="azul_normal">@color/AzulMedio</color>
     <color name="dark_red">#ba0000</color>
     <color name="white">#FFFFFF</color>
+    <color name="gray">#DDDDDD</color>
 </resources>
 
 
