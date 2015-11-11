@@ -51,6 +51,7 @@ public class GradesFragment extends Fragment {
 
         if(gradeList.isEmpty()){
             showGradesNotFound();
+            btDropAll.hide();
         }else{
             adapter = new GradeAdapter(rootView.getContext(),gradeList);
 
@@ -62,10 +63,6 @@ public class GradesFragment extends Fragment {
 
             recyclerView.setItemAnimator(new SlideInLeftAnimator());
             recyclerView.setAdapter(adapter);
-
-            if (gradeList.isEmpty()){
-                btDropAll.hide();
-            }
         }
 
         return rootView;

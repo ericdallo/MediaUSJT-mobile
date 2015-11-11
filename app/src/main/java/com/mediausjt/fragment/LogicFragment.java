@@ -14,12 +14,11 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.mediausjt.R;
+import com.mediausjt.util.FragmentUtil;
 import com.mediausjt.util.MaskedInput;
 import com.mediausjt.util.MediaConfig;
-import com.mediausjt.util.FragmentUtil;
 import com.mediausjt.util.MediaDialog;
 
-import br.com.jansenfelipe.androidmask.MaskEditTextChangedListener;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -163,7 +162,7 @@ public class LogicFragment extends Fragment{
             return false;
         });
 
-        /*final MaskedInput maskedInput2 = new MaskedInput(this, "#.#", etSecondGrade);
+        final MaskedInput maskedInput2 = new MaskedInput(this, "#.#", etSecondGrade);
         etSecondGrade.addTextChangedListener(maskedInput2.insert());
         etSecondGrade.setOnKeyListener((v, keyCode, event) -> {
             if (keyCode == KeyEvent.KEYCODE_0) {
@@ -172,7 +171,7 @@ public class LogicFragment extends Fragment{
                 maskedInput2.pressed(false);
             }
             return false;
-        });*/
+        });
     }
 
     public void cleanAverage() {

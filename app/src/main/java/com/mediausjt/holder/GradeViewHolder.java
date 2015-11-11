@@ -24,7 +24,6 @@ import butterknife.OnClick;
 public class GradeViewHolder extends RecyclerView.ViewHolder {
 
     final DBHelper meudb = new DBHelper(MediaConfig.getActivity());
-
     private List<Grade> gradeList;
 
     @Bind(R.id.tv_matter_name)

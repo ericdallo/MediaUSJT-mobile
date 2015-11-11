@@ -32,7 +32,6 @@
     </LinearLayout>
 
     <RelativeLayout
-
         android:id="@+id/lt_grades"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -78,20 +77,23 @@
             android:scrollbarStyle="insideOverlay" />
 
 
-        <android.support.design.widget.FloatingActionButton
-            android:id="@+id/bt_drop_all"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="@dimen/fab_button_margin_bottom"
-            android:src="@drawable/fab_delete"
-            app:backgroundTint="@color/dark_red"
-            app:borderWidth="0dp"
-            app:elevation="6dp"
-            app:layout_anchorGravity="bottom|center"
-            app:pressedTranslationZ="12dp" />
     </RelativeLayout>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/bt_drop_all"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/fab_button_margin_bottom"
+        android:clickable="true"
+        android:src="@drawable/fab_delete"
+        app:backgroundTint="@color/dark_red"
+        app:borderWidth="0dp"
+        app:elevation="6dp"
+        app:layout_anchor="@id/lt_grades"
+        app:layout_anchorGravity="bottom|center"
+        app:pressedTranslationZ="12dp" />
 
 
 </android.support.design.widget.CoordinatorLayout>
